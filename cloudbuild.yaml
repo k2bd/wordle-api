@@ -1,0 +1,42 @@
+# Required substituion variables:
+# - _GCP_FASTAPI_POETRY_DOMAIN
+
+
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
+    args:
+      - -c
+      - docker build -t gcr.io/$PROJECT_ID/gcp-fastapi-poetry:${TAG_NAME} -f Dockerfile .
+
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/gcp-fastapi-poetry:${TAG_NAME}"]
+
+  # Deploy service image to Cloud Run
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
+    args:
+      - -c
+      - >
+        gcloud
+        run deploy ${TAG_NAME}-gcp-fastapi-poetry
+        --cpu 1
+        --memory 256M
+        --max-instances 5
+        --image gcr.io/$PROJECT_ID/gcp-fastapi-poetry:${TAG_NAME}
+        --region europe-west1
+        --platform managed
+        --allow-unauthenticated
+
+  # Apply domain mapping. Cheap idempotency by ignoring failures.
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "bash"
+    args:
+      - -c
+      - >
+        gcloud
+        beta run domain-mappings create
+        --service ${TAG_NAME}-gcp-fastapi-poetry
+        --domain ${TAG_NAME}.${_GCP_FASTAPI_POETRY_DOMAIN}
+        --region europe-west1
+        || true
