@@ -47,4 +47,4 @@ async def guess_random(guess: str, size: int = 5, seed: int = None):
     response_model=List[GuessResult],
 )
 async def guess_word(word: str, guess: str):
-    return Wordle(solution=word).guess(guess)
+    return Wordle(solution=word.lower()).guess(guess)
