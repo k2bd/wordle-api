@@ -1,7 +1,7 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from gcp_fastapi_poetry.api import app
+from wordle_api.api import app
 
 
 @pytest.fixture

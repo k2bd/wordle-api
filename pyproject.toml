@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "gcp-fastapi-poetry"
+name = "wordle-api"
 version = "0.1.0"
 description = ""
 authors = []
@@ -9,6 +9,8 @@ python = "^3.9"
 fastapi = "^0.71.0"
 fastapi-camelcase = "^1.0.5"
 uvicorn = "^0.16.0"
+english-words = "^1.0.4"
+numpy = "^1.22.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
@@ -19,6 +21,8 @@ mypy = "^0.931"
 pytest-cov = "^3.0.0"
 poethepoet = "^0.11.0"
 requests = "^2.27.1"
+freezegun = "^1.1.0"
+types-freezegun = "^1.1.6"
 
 [tool.isort]
 profile = "black"
@@ -41,17 +45,17 @@ test.sequence = ["unit", "integration"]
 
 [tool.poe.tasks.unit]
 sequence = [
-    {cmd = "pytest -vv --cov-report xml --cov-report term --cov=gcp_fastapi_poetry tests/unit"},
+    {cmd = "pytest -vv --cov-report xml --cov-report term --cov=wordle_api tests/unit"},
 ]
 
 [tool.poe.tasks.integration]
 sequence = [
-    {shell = "pytest -vv --cov-append --cov-report xml --cov-report term --cov=gcp_fastapi_poetry tests/integration"},
+    {shell = "pytest -vv --cov-append --cov-report xml --cov-report term --cov=wordle_api tests/integration"},
 ]
 
 [tool.poe.tasks.local-server]
 sequence = [
-    {shell = "uvicorn gcp_fastapi_poetry.api:app --reload --port 8011"},
+    {shell = "uvicorn wordle_api.api:app --reload --port 8011"},
 ]
 
 [build-system]

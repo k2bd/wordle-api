@@ -31,4 +31,4 @@ COPY ./ ./
 # install runtime deps - uses $POETRY_VIRTUALENVS_IN_PROJECT internally
 RUN poetry install --no-dev
 
-CMD ["uvicorn", "gcp_fastapi_poetry.api:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "wordle_api.api:app", "--host", "0.0.0.0", "--port", "8080"]
