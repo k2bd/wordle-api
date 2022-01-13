@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "wordle-api"
-version = "1.1.2"
+version = "1.1.3-alpha.0"
 description = ""
 authors = []
 
