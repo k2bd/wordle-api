@@ -16,6 +16,14 @@ class ResultKind(str, Enum):
     PRESENT = "present"
     CORRENT = "correct"
 
+    def square(self):
+        if self == ResultKind.CORRENT:
+            return "🟧"
+        elif self == ResultKind.PRESENT:
+            return "🟦"
+        else:
+            return "⬛"
+
 
 class GuessResult(CamelModel):
     #: Slot
@@ -63,6 +71,9 @@ class Wordle(CamelModel):
         return cls.random(size=size, seed=seed)
 
     def guess(self, guess_word: str) -> List[GuessResult]:
+        """
+        Get the result of a single guess
+        """
         guess_word = guess_word.lower()
 
         if len(guess_word) != len(self.solution):
@@ -89,3 +100,11 @@ class Wordle(CamelModel):
                 zip(guess_word, self.solution)
             )
         ]
+
+    def report(self, guesses: List[str]) -> str:
+        """
+        Get an emoji report of a set of guesses
+        """
+        return "\n".join(
+            "".join([r.result.square() for r in self.guess(g)]) for g in guesses
+        )

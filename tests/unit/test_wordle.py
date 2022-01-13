@@ -4,7 +4,14 @@ from typing import List
 import pytest
 
 from wordle_api.exceptions import InvalidGuess
-from wordle_api.types import GuessResult, ResultKind, Wordle
+from wordle_api.wordle import GuessResult, ResultKind, Wordle
+
+EXAMPLE_REPORT = """🟧⬛⬛🟧⬛
+⬛⬛🟦🟦⬛
+⬛⬛🟦🟦⬛
+⬛⬛⬛⬛⬛
+🟦⬛🟦⬛⬛
+🟧🟧🟧🟧🟧"""
 
 
 def test_daily():
@@ -97,3 +104,21 @@ def test_guess_non_alphabetical():
     """
     with pytest.raises(InvalidGuess):
         Wordle(solution="kelp").guess("k2bd")
+
+
+def test_report():
+    """
+    Can generate an emoji report of a set of guesses
+    """
+    report = Wordle(solution="abbey").report(
+        [
+            "anger",
+            "steam",
+            "plead",
+            "quick",
+            "bravo",
+            "abbey",
+        ]
+    )
+
+    assert report == EXAMPLE_REPORT

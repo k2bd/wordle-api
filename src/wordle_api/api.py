@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import PlainTextResponse
 
 from wordle_api.exceptions import InvalidGuess
-from wordle_api.types import GuessResult, Wordle
+from wordle_api.wordle import GuessResult, Wordle
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +31,9 @@ def handle_invalid_guess(equest: Request, exc: InvalidGuess):
     response_model=List[GuessResult],
 )
 async def guess_daily(guess: str, size: int = 5):
+    """
+    Guess against the daily puzzle
+    """
     return Wordle.daily(size=size).guess(guess)
 
 
@@ -39,6 +42,9 @@ async def guess_daily(guess: str, size: int = 5):
     response_model=List[GuessResult],
 )
 async def guess_random(guess: str, size: int = 5, seed: int = None):
+    """
+    Guess against a random word
+    """
     return Wordle.random(size=size, seed=seed).guess(guess)
 
 
@@ -47,4 +53,7 @@ async def guess_random(guess: str, size: int = 5, seed: int = None):
     response_model=List[GuessResult],
 )
 async def guess_word(word: str, guess: str):
+    """
+    Guess against a selected word
+    """
     return Wordle(solution=word.lower()).guess(guess)

@@ -1,10 +1,13 @@
 # Wordle API
 [![CI](https://github.com/k2bd/wordle-api/actions/workflows/ci.yml/badge.svg)](https://github.com/k2bd/wordle-api/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/k2bd/wordle-api/branch/main/graph/badge.svg?token=4LB5LSD1AT)](https://codecov.io/gh/k2bd/wordle-api)
+[![PyPI](https://img.shields.io/pypi/v/wordle-api)](https://pypi.org/project/wordle-api/)
 
 A simple stateless API for daily or on-demand random wordle puzzles of variable size, for example for bot competitions.
 
 You can hit the `/daily` and `/random` endpoints to get the results of single guesses. Set a seed for the `/random` endpoint to be able to solve a puzzle in steps. Use the `/word/{yourword}` endpoint for specifying an exact word to play against.
+
+Also publishes the [`wordle-api` package on PyPI](https://pypi.org/project/wordle-api/), which may be useful for Python users of the API.
 
 ## Developing
 
