@@ -1,4 +1,6 @@
 # Wordle API
+[![CI](https://github.com/k2bd/wordle-api/actions/workflows/ci.yml/badge.svg)](https://github.com/k2bd/wordle-api/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/k2bd/wordle-api/branch/main/graph/badge.svg?token=4LB5LSD1AT)](https://codecov.io/gh/k2bd/wordle-api)
 
 A simple stateless API for daily or on-demand random wordle puzzles of variable size, for example for bot competitions.
 
@@ -16,6 +18,8 @@ Note: if Poetry is managing a virtual environment for you, you may need to use `
 - `poe lint` - Linting
 - `poe test` - Run Tests
 - `poe local-server` - Run your API locally
+
+While the local server is running, you can see API docs at `http://localhost:8011/docs` or `http://localhost:8011/redoc`, and can get the OpenAPI spec at `http://localhost:8011/openapi.json`.
 
 ### Deployment
 
