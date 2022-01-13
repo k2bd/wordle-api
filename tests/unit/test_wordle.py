@@ -14,22 +14,22 @@ EXAMPLE_REPORT = """🟧⬛⬛🟧⬛
 🟧🟧🟧🟧🟧"""
 
 
-def test_daily():
+@pytest.mark.parametrize("size, word", [(4, "post"), (5, "scaly")])
+def test_daily(size: int, word: str):
     """
     Daily puzzle is consistent
     """
     example_date = date(1992, 1, 16)
-    assert Wordle.daily(size=4, puzzle_date=example_date) == Wordle(solution="port")
-    assert Wordle.daily(size=5, puzzle_date=example_date) == Wordle(solution="scaly")
+    assert Wordle.daily(size=size, puzzle_date=example_date) == Wordle(solution=word)
 
 
-def test_random():
+@pytest.mark.parametrize("size, word", [(3, "out"), (5, "cabot")])
+def test_random(size: int, word: str):
     """
     A random puzzle is consistent
     """
     seed = 12345
-    assert Wordle.random(size=3, seed=seed) == Wordle(solution="ore")
-    assert Wordle.random(size=5, seed=seed) == Wordle(solution="cabot")
+    assert Wordle.random(size=size, seed=seed) == Wordle(solution=word)
 
 
 @pytest.mark.parametrize(

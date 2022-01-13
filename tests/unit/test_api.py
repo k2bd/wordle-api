@@ -48,14 +48,14 @@ def test_random_200(api_client: TestClient):
     """
     GET /random?size=3&seed=12345&guess=toe OK
     """
-    # Seed 12345 size 3 answer is 'ore'
+    # Seed 12345 size 3 answer is 'out'
     response = api_client.get("/random?size=3&seed=12345&guess=toe")
 
     assert response.status_code == 200
     assert response.json() == [
-        {"guess": "t", "result": "absent", "slot": 0},
+        {"guess": "t", "result": "present", "slot": 0},
         {"guess": "o", "result": "present", "slot": 1},
-        {"guess": "e", "result": "correct", "slot": 2},
+        {"guess": "e", "result": "absent", "slot": 2},
     ]
 
 
