@@ -5,6 +5,8 @@
 
 A simple stateless API for daily or on-demand random wordle puzzles of variable size, for example for bot competitions.
 
+See https://v1.wordle.k2bd.dev/redoc
+
 You can hit the `/daily` and `/random` endpoints to get the results of single guesses. Set a seed for the `/random` endpoint to be able to solve a puzzle in steps. Use the `/word/{yourword}` endpoint for specifying an exact word to play against.
 
 Also publishes the [`wordle-api` package on PyPI](https://pypi.org/project/wordle-api/), which may be useful for Python users of the API.
